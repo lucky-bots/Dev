@@ -13,7 +13,7 @@ if (isset($_REQUEST['logout'])) {
     unset($_SESSION['fb_token']);
 }
 if (@$_SESSION['fb_token']) {  //error supressor stavljen
-header('Location: http://autofacebookgroupposter.com/autoposter.php');
+header('Location: https://devsakhon.herokuapp.com/autoposter.php');
 exit;
 }
 ?>
@@ -21,12 +21,12 @@ exit;
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Free facebook group poster | Automate your groups postings on facebook</title>
+    <title>โพส เฟส กลุ่ม ออโต้</title>
     <meta name="description" content="Post FREE to UNLIMITED facebook groups with a click!">
     <meta name="keywords" content="free facebook group poster, fb group poster, facebook group poster, post to facebook groups, facebook auto poster, facebook autoposter, fb autoposter, facebook group autoposter, fb group autoposter">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
-    <meta name="copyright" content="Copyright © 2015 Autofacebookgroupposter.com">
+    <meta name="copyright" content="Copyright © 2020 https://devsakhon.herokuapp.com">
     <meta name="rating" content="general">
     <meta name="distribution" content="Global">
     <meta name="revisit-after" content="30 days">
@@ -39,6 +39,7 @@ exit;
 
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css";>
+    
 </head>
 <body>
 
@@ -79,12 +80,12 @@ use Facebook\FacebookCurl;
 
 $app_id = '1331617640639225';
 $app_secret = '3cd999276fda14d6b8aadd9ac03cf24c';
-$redirect_url = 'http://autofacebookgroupposter.com/';
+$redirect_url = 'https://devsakhon.herokuapp.com';
 
 FacebookSession::setDefaultApplication($app_id,$app_secret);
 $helper = new FacebookRedirectLoginHelper($redirect_url);
 
-$logout = 'http://autofacebookgroupposter.com/index.php?fblogin&logout=true';
+$logout = 'https://devsakhon.herokuapp.com?fblogin&logout=true';
 
 try {
     $sess = $helper->getSessionFromRedirect();
@@ -133,35 +134,12 @@ if (isset($sess)) {
 		</div>
 		
 		<div id="footer">
-		<strong>&copy; 2015 Autofacebookgroupposter.com</strong>
+		<strong>&copy; 2020  https://devsakhon.herokuapp.com</strong>
 		</div>
 	</div>
 	
 	
 </div>
-
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{your-app-id}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
 </body>
 </html>
