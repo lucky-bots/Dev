@@ -1,0 +1,18 @@
+html {
+
+    background-color: #fafafa;
+}
+
+
+#main {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.grupe {
+    float: right;
+}
+
+.margin {
+    margin: 30px 0;
+}
