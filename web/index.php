@@ -1,22 +1,4 @@
 
-
-<?php
-/**
- * Created by PhpStorm.
- * User: Milos
- * Date: 12.3.2015
- * Time: 12:24
- */
-
-session_start();
-if (isset($_REQUEST['logout'])) {
-    unset($_SESSION['fb_token']);
-}
-if (@$_SESSION['fb_token']) {  //error supressor stavljen
-header('Location: https://devsakhon.herokuapp.com/autoposter.php');
-exit;
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,81 +24,9 @@ exit;
     
 </head>
 <body>
-
-<?php
-/* INCLUSION OF LIBRARY FILES*/
-
-require_once('lib/Facebook/FacebookSession.php');
-require_once('lib/Facebook/FacebookRequest.php');
-require_once('lib/Facebook/FacebookResponse.php');
-require_once('lib/Facebook/FacebookSDKException.php');
-require_once('lib/Facebook/FacebookRequestException.php');
-require_once('lib/Facebook/FacebookRedirectLoginHelper.php');
-require_once('lib/Facebook/FacebookAuthorizationException.php');
-require_once('lib/Facebook/GraphObject.php');
-require_once('lib/Facebook/GraphUser.php');
-require_once('lib/Facebook/Entities/AccessToken.php');
-require_once('lib/Facebook/HttpClients/FacebookCurl.php');
-require_once('lib/Facebook/HttpClients/FacebookHttpable.php');
-require_once('lib/Facebook/HttpClients/FacebookCurlHttpClient.php');
-
-
-/* USE NAMESPACES */
-
-use Facebook\FacebookSession;
-use Facebook\FacebookRedirectLoginHelper;
-use Facebook\FacebookRequest;
-use Facebook\FacebookResponse;
-use Facebook\FacebookSDKException;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookAuthorizationException;
-use Facebook\GraphObject;
-use Facebook\GraphUser;
-use Facebook\GraphSessionInfo;
-use Facebook\FacebookCurlHttpClient;
-use Facebook\FacebookCurl;
-
-/* PROCESS */
-
-$app_id = '1331617640639225';
-$app_secret = '3cd999276fda14d6b8aadd9ac03cf24c';
-$redirect_url = 'https://devsakhon.herokuapp.com';
-
-FacebookSession::setDefaultApplication($app_id,$app_secret);
-$helper = new FacebookRedirectLoginHelper($redirect_url);
-
-$logout = 'https://devsakhon.herokuapp.com?fblogin&logout=true';
-
-try {
-    $sess = $helper->getSessionFromRedirect();
-}
-catch (FacebookRequestException $ex) {
-
-}
-catch (Exception $ex) {
-
-}
-
-if(isset($_SESSION['fb_token'])){
-    $sess = new FacebookSession($_SESSION['fb_token']);
-
-}
-
-if (isset($sess)) {
-
-    $request = new FacebookRequest($sess,'GET','/me');
-    $response = $request->execute();
-    $graph = $response->getGraphObject((GraphUser::className()));
-    $name = $graph->getName();
-    $_SESSION['fb_token'] = $sess->getToken();
-    echo "Hi $name";
-    echo " <a href='".$logout."'><buttton>Logoout</button></a><br>";
-    echo "<a href='autoposter.php'><p>Go to AutoPoster</p></a>";
-
-}
-
-
-?>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v13.0&appId=1331617640639225&autoLogAppEvents=1" nonce="wETBabkN"></script>
+     <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="true"></div>
 <div id="main">
 	<div id="center">
 		<div id="text">
